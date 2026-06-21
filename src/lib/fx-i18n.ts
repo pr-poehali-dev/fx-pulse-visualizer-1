@@ -1,0 +1,46 @@
+export type Lang = 'en' | 'ru';
+
+export const T = {
+  en: {
+    nav_converter: 'Converter', nav_market: 'Market', nav_charts: 'Charts', nav_about: 'About',
+    live: 'LIVE',
+    hero_badge: 'Real-time rates from global markets',
+    hero_h1a: 'Understand Exchange Rates', hero_h1b: 'Across the World',
+    hero_sub: 'A premium visualizer of fiat & crypto rates for travelers. Explore live markets, interactive candlestick charts and instant conversion — no accounts, no transactions.',
+    conv_title: 'Currency Converter', conv_demo: 'DEMO — visualization only',
+    conv_from: 'From', conv_to: 'To', conv_rate: 'Rate', conv_updated: 'Last updated',
+    stat_fiat: 'Fiat Currencies', stat_crypto: 'Crypto Assets', stat_pairs: 'Market Pairs', stat_source: 'Data Source',
+    market_title: 'Market Overview', market_sub: 'Live prices across 10 currencies — tap any card to explore',
+    tab_all: 'All', tab_fiat: 'Fiat', tab_crypto: 'Crypto',
+    chart_title: 'Detailed Chart',
+    open: 'Open', high: 'High', low: 'Low', close: 'Close', volume: 'Volume',
+    about_title: 'Why FX Pulse',
+    f1t: 'Global Coverage', f1d: 'Fiat and crypto from markets around the world in one clean dashboard.',
+    f2t: 'Visual Insights', f2d: 'Japanese candlestick charts reveal trends at a single glance.',
+    f3t: 'Real-time API', f3d: 'Powered by public CoinGecko & Frankfurter feeds, refreshed live.',
+    f4t: 'No Transactions', f4d: 'Pure visualization. No sign-ups, no trading, no risk — ever.',
+    footer_rights: 'All rights reserved.', footer_note: 'Rates via public APIs · Not for actual trading',
+  },
+  ru: {
+    nav_converter: 'Конвертер', nav_market: 'Рынок', nav_charts: 'Графики', nav_about: 'О сервисе',
+    live: 'LIVE',
+    hero_badge: 'Курсы в реальном времени с мировых рынков',
+    hero_h1a: 'Понимай валютные курсы', hero_h1b: 'по всему миру',
+    hero_sub: 'Премиум-визуализатор курсов фиата и крипты для путешественников. Живые рынки, интерактивные свечные графики и мгновенная конвертация — без аккаунтов и сделок.',
+    conv_title: 'Конвертер валют', conv_demo: 'ДЕМО — только визуализация',
+    conv_from: 'Из', conv_to: 'В', conv_rate: 'Курс', conv_updated: 'Обновлено',
+    stat_fiat: 'Фиатные валюты', stat_crypto: 'Крипто-активы', stat_pairs: 'Торговых пар', stat_source: 'Источник данных',
+    market_title: 'Обзор рынка', market_sub: 'Живые цены 10 валют — нажми на карточку для деталей',
+    tab_all: 'Все', tab_fiat: 'Фиат', tab_crypto: 'Крипта',
+    chart_title: 'Детальный график',
+    open: 'Откр.', high: 'Макс.', low: 'Мин.', close: 'Закр.', volume: 'Объём',
+    about_title: 'Почему FX Pulse',
+    f1t: 'Глобальный охват', f1d: 'Фиат и крипта со всего мира в одной чистой панели.',
+    f2t: 'Наглядность', f2d: 'Японские свечи показывают тренды с одного взгляда.',
+    f3t: 'API в реальном времени', f3d: 'Данные из публичных CoinGecko и Frankfurter, живое обновление.',
+    f4t: 'Без сделок', f4d: 'Только визуализация. Без регистраций, торговли и рисков.',
+    footer_rights: 'Все права защищены.', footer_note: 'Курсы через публичные API · Не для реальной торговли',
+  },
+};
+
+export type Dict = typeof T.en;

@@ -20,8 +20,8 @@ const MarketCard = ({ cur, price, change, candles, selected, onSelect, t, index 
   return (
     <button
       onClick={onSelect}
-      style={{ animationDelay: `${index * 60}ms`, ['--glow' as string]: cur.color }}
-      className={`group text-left fx-glass rounded-2xl p-4 relative overflow-hidden transition-all duration-300 animate-fade-up hover:-translate-y-1.5
+      style={{ animationDelay: `${index * 60}ms`, ['--glow' as string]: cur.color, borderColor: selected ? cur.color : undefined }}
+      className={`group text-left fx-glass fx-shine rounded-2xl p-4 relative overflow-hidden transition-all duration-300 animate-fade-up hover:-translate-y-1.5
         ${selected ? 'ring-2 shadow-[0_0_30px_var(--glow)]' : 'hover:ring-1 ring-white/10'}`}
     >
       <div className="absolute -top-16 -right-16 w-32 h-32 rounded-full opacity-0 group-hover:opacity-30 transition-opacity blur-2xl"

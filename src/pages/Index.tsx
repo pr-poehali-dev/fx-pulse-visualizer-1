@@ -5,11 +5,22 @@ import Header from '@/components/fx/Header';
 import Converter from '@/components/fx/Converter';
 import MarketCard from '@/components/fx/MarketCard';
 import ChartCard from '@/components/fx/ChartCard';
+import Ticker from '@/components/fx/Ticker';
 import Icon from '@/components/ui/icon';
 
 const FALLBACK_MARKET: MarketState = {
-  prices: { USD: 1, EUR: 1.08, JPY: 0.0067, RUB: 0.011, IDR: 0.000063, BTC: 67000, ETH: 3500, BNB: 600, TON: 5.2, USDT: 1 },
-  changes: { USD: 0, EUR: 0.2, JPY: -0.3, RUB: 0.5, IDR: -0.1, BTC: 2.4, ETH: 1.8, BNB: -0.9, TON: 3.1, USDT: 0.01 },
+  prices: {
+    USD: 1, EUR: 1.08, JPY: 0.0067, RUB: 0.011, IDR: 0.000063,
+    GBP: 1.27, CNY: 0.14, CHF: 1.11, AUD: 0.66, CAD: 0.73, INR: 0.012, TRY: 0.031,
+    BTC: 67000, ETH: 3500, BNB: 600, TON: 5.2, USDT: 1,
+    SOL: 150, XRP: 0.52, ADA: 0.45, DOGE: 0.13, AVAX: 35, DOT: 6.8, MATIC: 0.55,
+  },
+  changes: {
+    USD: 0, EUR: 0.2, JPY: -0.3, RUB: 0.5, IDR: -0.1,
+    GBP: 0.3, CNY: -0.2, CHF: 0.1, AUD: -0.4, CAD: 0.2, INR: -0.1, TRY: -0.8,
+    BTC: 2.4, ETH: 1.8, BNB: -0.9, TON: 3.1, USDT: 0.01,
+    SOL: 4.2, XRP: -1.3, ADA: 2.1, DOGE: 5.6, AVAX: -2.4, DOT: 1.2, MATIC: -0.7,
+  },
 };
 
 const Index = () => {
@@ -112,19 +123,21 @@ const Index = () => {
   );
 
   const stats = [
-    { label: t.stat_fiat, value: '5', sub: 'USD · EUR · JPY · RUB · IDR', icon: 'Landmark', color: '#00d4ff' },
-    { label: t.stat_crypto, value: '5', sub: 'BTC · ETH · BNB · TON · USDT', icon: 'Bitcoin', color: '#a855f7' },
-    { label: t.stat_pairs, value: '45+', sub: 'fiat ⇆ crypto', icon: 'Network', color: '#ec4899' },
+    { label: t.stat_fiat, value: '12', sub: 'USD · EUR · GBP · CNY · …', icon: 'Landmark', color: '#00d4ff' },
+    { label: t.stat_crypto, value: '12', sub: 'BTC · ETH · SOL · XRP · …', icon: 'Bitcoin', color: '#a855f7' },
+    { label: t.stat_pairs, value: '550+', sub: 'fiat ⇆ crypto', icon: 'Network', color: '#ec4899' },
     { label: t.stat_source, value: 'Live', sub: 'CoinGecko + Frankfurter', icon: 'Radio', color: '#22c55e' },
   ];
 
   const features = [
-    { e: '🌍', t: t.f1t, d: t.f1d }, { e: '📈', t: t.f2t, d: t.f2d },
-    { e: '⚡', t: t.f3t, d: t.f3d }, { e: '🔒', t: t.f4t, d: t.f4d },
+    { e: '🌍', t: t.f1t, d: t.f1d, color: '#00d4ff' },
+    { e: '📈', t: t.f2t, d: t.f2d, color: '#a855f7' },
+    { e: '⚡', t: t.f3t, d: t.f3d, color: '#ec4899' },
+    { e: '🔒', t: t.f4t, d: t.f4d, color: '#fbbf24' },
   ];
 
   return (
-    <div id="top" className="min-h-screen relative">
+    <div id="top" className="min-h-screen relative fx-noise">
       {/* background orbs + grid */}
       <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
         <div className="absolute top-[-10%] left-[10%] w-[40vw] h-[40vw] rounded-full bg-fx-cyan/45 blur-[140px] animate-orb-float" />
@@ -135,12 +148,15 @@ const Index = () => {
       </div>
 
       <Header t={t} lang={lang} setLang={setLang} />
+      <Ticker market={market} />
 
       {/* HERO */}
       <section className="max-w-[1280px] mx-auto px-5 pt-16 pb-8 text-center">
-        <span className="inline-flex items-center gap-2 fx-glass rounded-full px-4 py-1.5 text-xs font-medium text-white/70 animate-fade-up">
-          <span className="w-1.5 h-1.5 rounded-full bg-fx-cyan animate-pulse-dot" />
-          {t.hero_badge}
+        <span className="relative inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-medium text-white/80 animate-fade-up overflow-hidden">
+          <span className="absolute inset-0 fx-ring-glow opacity-40 blur-[2px]" aria-hidden="true" />
+          <span className="absolute inset-[1px] rounded-full bg-[#0a0c14]" aria-hidden="true" />
+          <span className="relative w-1.5 h-1.5 rounded-full bg-fx-cyan animate-pulse-dot" />
+          <span className="relative">{t.hero_badge}</span>
         </span>
         <h1 className="mt-6 font-black tracking-[-0.04em] leading-[0.95] animate-fade-up" style={{ fontSize: 'clamp(40px,8vw,80px)', animationDelay: '80ms' }}>
           <span className="text-white">{t.hero_h1a}</span><br />
@@ -156,9 +172,12 @@ const Index = () => {
       {/* STATS */}
       <section className="max-w-[1280px] mx-auto px-5 mt-6 grid grid-cols-2 lg:grid-cols-4 gap-4">
         {stats.map((s, i) => (
-          <div key={s.label} className="fx-glass rounded-2xl p-5 animate-fade-up relative overflow-hidden" style={{ animationDelay: `${i * 60}ms` }}>
-            <Icon name={s.icon} size={20} style={{ color: s.color }} className="mb-3" fallback="Coins" />
-            <div className="text-3xl font-extrabold font-mono" style={{ color: s.color }}>{s.value}</div>
+          <div key={s.label} className="fx-glass fx-shine rounded-2xl p-5 animate-fade-up relative overflow-hidden hover:-translate-y-1 transition-transform duration-300" style={{ animationDelay: `${i * 60}ms` }}>
+            <div className="absolute -top-10 -right-10 w-24 h-24 rounded-full blur-2xl opacity-20" style={{ background: s.color }} aria-hidden="true" />
+            <div className="grid place-items-center w-10 h-10 rounded-xl mb-3 relative" style={{ background: `${s.color}1a`, border: `1px solid ${s.color}33` }}>
+              <Icon name={s.icon} size={18} style={{ color: s.color }} fallback="Coins" />
+            </div>
+            <div className="text-3xl font-extrabold font-mono tabular-nums" style={{ color: s.color }}>{s.value}</div>
             <div className="text-sm font-semibold text-white/80 mt-1">{s.label}</div>
             <div className="text-[11px] text-white/40 mt-0.5">{s.sub}</div>
           </div>
@@ -184,7 +203,7 @@ const Index = () => {
 
         <div className="grid gap-4" style={{ gridTemplateColumns: 'repeat(auto-fill,minmax(320px,1fr))' }}>
           {!loaded
-            ? Array.from({ length: 6 }).map((_, i) => (
+            ? Array.from({ length: 8 }).map((_, i) => (
               <div key={i} className="fx-glass rounded-2xl h-[130px] relative overflow-hidden">
                 <div className="absolute inset-0 animate-shimmer" style={{ background: 'linear-gradient(90deg,transparent,rgba(255,255,255,0.05),transparent)', backgroundSize: '936px 100%' }} />
               </div>
@@ -209,8 +228,9 @@ const Index = () => {
         <h2 className="text-3xl font-extrabold tracking-tight text-center mb-10">{t.about_title}</h2>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {features.map((f, i) => (
-            <div key={f.t} className="fx-glass rounded-2xl p-6 animate-fade-up hover:-translate-y-1 transition-transform" style={{ animationDelay: `${i * 60}ms` }}>
-              <div className="text-4xl mb-4">{f.e}</div>
+            <div key={f.t} className="fx-glass fx-shine rounded-2xl p-6 animate-fade-up hover:-translate-y-1.5 transition-transform duration-300 relative overflow-hidden" style={{ animationDelay: `${i * 60}ms` }}>
+              <div className="absolute -top-12 -right-12 w-28 h-28 rounded-full blur-3xl opacity-20" style={{ background: f.color }} aria-hidden="true" />
+              <div className="grid place-items-center w-14 h-14 rounded-2xl text-3xl mb-4 relative" style={{ background: `${f.color}1a`, border: `1px solid ${f.color}33` }}>{f.e}</div>
               <h3 className="font-bold text-lg mb-2">{f.t}</h3>
               <p className="text-sm text-white/50 leading-relaxed">{f.d}</p>
             </div>
